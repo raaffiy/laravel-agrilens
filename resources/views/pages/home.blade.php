@@ -1,212 +1,151 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Beranda - AgriLens Smart Agriculture')
+@section('title', 'AgriLens')
 
 @section('content')
-    <!-- Hero Section Terbingkai Rapi -->
-    <section class="max-w-5xl mx-auto px-6 pt-12 pb-16 text-center relative">
-        <div class="bg-slate-950/60 backdrop-blur-2xl border border-white/10 p-10 md:p-14 rounded-3xl shadow-2xl">
-            <span class="inline-block bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest shadow-sm">
-                Solusi Cerdas Pertanian Berkelanjutan
-            </span>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight tracking-tight">
-                Pertanian Lebih Cerdas dengan <span class="text-emerald-400">AgriLens</span>
+    <!-- Hero Section -->
+    <main class="container mx-auto px-6 py-20 md:py-32 text-center">
+        <div class="bg-black/40 backdrop-blur-xl p-10 rounded-3xl max-w-5xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+                Masa Depan Pertanian Dimulai di Sini
             </h1>
-            <p class="mt-6 text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Platform edukasi, monitoring, dan komunitas petani modern. Membantu meningkatkan hasil panen dan ketahanan pangan melalui teknologi.
+            <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                Menggabungkan Teknologi Cerdas dan Kearifan Lokal untuk Komunitas Pertanian yang Mandiri dan Berkelanjutan.
             </p>
-            <div class="mt-8 flex flex-wrap justify-center items-center gap-4">
-                <a href="{{ route('module.index') }}" 
-                   class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-extrabold py-3.5 px-8 rounded-2xl transition duration-300 transform hover:scale-105 shadow-xl shadow-emerald-500/25 text-sm md:text-base inline-flex items-center gap-2">
-                    <span>📚</span> Mulai Belajar Modul
-                </a>
+            <div class="mt-10">
                 <a href="{{ route('lens.ai') }}" 
-                   class="bg-slate-900/80 hover:bg-slate-800/90 border border-emerald-400/40 hover:border-emerald-400 text-emerald-300 hover:text-white font-bold py-3.5 px-8 rounded-2xl transition duration-300 transform hover:scale-105 backdrop-blur-xl text-sm md:text-base inline-flex items-center gap-2">
-                    <span>⚡</span> Coba Lens AI
+                   class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 text-lg inline-block">
+                    AgriLens - AI
                 </a>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Konten Utama (Spacing & Grid Presisi) -->
-    <div class="max-w-6xl mx-auto px-6 space-y-28">
+    <!-- Content Sections -->
+    <div class="py-20 bg-black/20">
+        <div class="container mx-auto px-6 space-y-20">
 
-        <!-- 1. Latar Belakang Section -->
-        <section id="latar-belakang" class="bg-slate-900/80 backdrop-blur-2xl p-8 md:p-14 rounded-3xl shadow-2xl border border-white/10 flex flex-col lg:flex-row items-center gap-12">
-            <div class="w-full lg:w-1/2">
-                <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full inline-block mb-3">
-                    Tentang Platform
-                </span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-2 mb-6 leading-tight">
-                    Latar Belakang <span class="text-emerald-400">AgriLens</span>
-                </h2>
-                <p class="text-slate-300 leading-relaxed text-sm md:text-base mb-4">
-                    Pertanian adalah sektor krusial bagi kehidupan kita, namun banyak petani menghadapi kendala dalam mendeteksi penyakit tanaman, akses harga pasar, dan teknik budidaya organik yang efisien.
-                </p>
-                <p class="text-slate-300 leading-relaxed text-sm md:text-base">
-                    <strong class="text-emerald-400 font-semibold">AgriLens</strong> hadir sebagai jembatan pengetahuan dengan menyediakan materi panduan praktis, analisis berbasis kecerdasan buatan, dan forum kolaborasi terbuka.
-                </p>
-            </div>
-            <div class="w-full lg:w-1/2 overflow-hidden rounded-2xl shadow-2xl border border-white/10">
-                <img src="{{ asset('assets/latarbelakang.png') }}" 
-                     alt="Smart Farming AgriLens" 
-                     class="w-full h-80 md:h-96 object-cover hover:scale-105 transition duration-500" 
-                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/4ade80?text=Smart+Farming';" />
-            </div>
-        </section>
-
-        <!-- 2. Tujuan Section (Grid 3 Kolom Rapi & Simetris) -->
-        <section id="tujuan" class="text-center">
-            <div class="mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1.5 rounded-full inline-block mb-3">
-                    Fokus & Komitmen
-                </span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white">
-                    Tujuan <span class="text-emerald-400">Kami</span>
-                </h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch">
-                <x-card>
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-3xl mb-6 shadow-inner">
-                            📖
-                        </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-3">
-                            Literasi Pertanian
-                        </h3>
-                        <p class="text-slate-300 leading-relaxed text-sm">
-                            Meningkatkan pengetahuan teknik bercocok tanam dan pembuatan pupuk organik melalui modul langkah-demi-langkah yang mudah dipahami.
-                        </p>
-                    </div>
-                </x-card>
-
-                <x-card>
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-3xl mb-6 shadow-inner">
-                            🔍
-                        </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-3">
-                            Monitoring Cerdas
-                        </h3>
-                        <p class="text-slate-300 leading-relaxed text-sm">
-                            Membantu mendeteksi dini gejala hama dan penyakit daun tanaman menggunakan teknologi pemrosesan citra kamera cerdas.
-                        </p>
-                    </div>
-                </x-card>
-
-                <x-card>
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-3xl mb-6 shadow-inner">
-                            🤝
-                        </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-3">
-                            Ekosistem Kolaboratif
-                        </h3>
-                        <p class="text-slate-300 leading-relaxed text-sm">
-                            Menghubungkan kelompok tani, akademisi, dan masyarakat luas dalam wadah forum tanya-jawab yang aktif dan saling mendukung.
-                        </p>
-                    </div>
-                </x-card>
-            </div>
-        </section>
-
-        <!-- 3. Modul Unggulan (Grid 3 Kolom Sejajar) -->
-        <section id="modul-unggulan">
-            <div class="flex justify-between items-end mb-10 flex-wrap gap-4 border-b border-white/10 pb-6">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1.5 rounded-full inline-block mb-2">
-                        Kurikulum Terpopuler
-                    </span>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-white">
-                        Modul Edukasi <span class="text-emerald-400">Pilihan</span>
+            <!-- Latar Belakang -->
+            <section id="latar-belakang" class="flex flex-col md:flex-row items-center gap-10">
+                <div class="w-full md:w-1/2 bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-2xl">
+                    <h2 class="text-3xl font-bold text-white mb-4">
+                        <span class="text-green-400">Latar Belakang</span> AgriLens
                     </h2>
-                    <p class="text-slate-400 text-sm mt-1">Panduan bertani yang paling banyak dipelajari minggu ini</p>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                        AgriLens lahir dari kebutuhan masyarakat dan petani untuk memiliki akses terhadap teknologi pertanian modern yang dapat membantu meningkatkan kualitas produksi, efisiensi kerja, serta memberikan edukasi pertanian yang mudah dipahami. Minimnya pemahaman masyarakat terhadap lingkungan dan pertanian berkelanjutan juga menjadi alasan utama dibuatnya platform ini. Dengan menggabungkan teknologi digital, edukasi, dan pemberdayaan komunitas, AgriLens hadir sebagai solusi untuk menciptakan sistem pertanian yang lebih cerdas dan ramah lingkungan.
+                    </p>
                 </div>
-                <a href="{{ route('module.index') }}" class="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 text-sm transition group">
-                    <span>Lihat Semua Modul</span>
-                    <span class="group-hover:translate-x-1 transition">→</span>
-                </a>
-            </div>
+                <div class="w-full md:w-1/2">
+                    <img src="{{ asset('assets/latarbelakang.png') }}" 
+                         alt="Smart Farming" 
+                         class="rounded-2xl shadow-2xl object-cover h-full w-full"
+                         onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/4ade80?text=AgriLens+Smart+Farming';" />
+                </div>
+            </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                @foreach ($featuredModules as $module)
-                    @include('partials.module-card', ['module' => $module])
-                @endforeach
-            </div>
-        </section>
-
-        <!-- 4. Manfaat AgriLens (Grid 2 Kolom Sejajar) -->
-        <section id="manfaat" class="text-center">
-            <div class="mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1.5 rounded-full inline-block mb-3">
-                    Keunggulan Ekosistem
-                </span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white">
-                    Manfaat <span class="text-emerald-400">AgriLens</span>
+            <!-- Tujuan -->
+            <section id="tujuan" class="text-center">
+                <h2 class="text-4xl font-bold text-white mb-12">
+                    Tujuan <span class="text-green-400">Kami</span>
                 </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left items-stretch">
-                <div class="bg-slate-900/80 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 flex items-start gap-5 hover:border-emerald-500/40 transition">
-                    <span class="text-3xl bg-emerald-500/15 text-emerald-400 p-3.5 rounded-2xl border border-emerald-500/30 flex-shrink-0">🌱</span>
-                    <div>
-                        <h4 class="font-bold text-xl text-white mb-2">Edukasi Pertanian Modern</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Materi lengkap dan terstruktur mulai dari persiapan lahan, pemupukan organik, hingga penanganan pascapanen.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500">
+                        <h3 class="text-2xl font-semibold text-green-400 mb-3">Literasi Pertanian</h3>
+                        <p class="text-gray-300">Meningkatkan literasi pertanian bagi masyarakat umum melalui modul interaktif dan gamifikasi.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500">
+                        <h3 class="text-2xl font-semibold text-green-400 mb-3">Monitoring Cerdas</h3>
+                        <p class="text-gray-300">Membantu petani memonitor kondisi tanah dan tanaman menggunakan teknologi digital secara real-time.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500">
+                        <h3 class="text-2xl font-semibold text-green-400 mb-3">Ekosistem Kolaboratif</h3>
+                        <p class="text-gray-300">Membangun forum komunikasi antara masyarakat, petani, dan pihak terkait untuk ekosistem yang solid.</p>
                     </div>
                 </div>
+            </section>
 
-                <div class="bg-slate-900/80 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 flex items-start gap-5 hover:border-blue-500/40 transition">
-                    <span class="text-3xl bg-blue-500/15 text-blue-400 p-3.5 rounded-2xl border border-blue-500/30 flex-shrink-0">📊</span>
-                    <div>
-                        <h4 class="font-bold text-xl text-white mb-2">Informasi Pasar & Cuaca</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Berita berkala mengenai fluktuasi komoditas dan peringatan dini cuaca ekstrem bagi petani.</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900/80 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 flex items-start gap-5 hover:border-purple-500/40 transition">
-                    <span class="text-3xl bg-purple-500/15 text-purple-400 p-3.5 rounded-2xl border border-purple-500/30 flex-shrink-0">💬</span>
-                    <div>
-                        <h4 class="font-bold text-xl text-white mb-2">Pusat Diskusi Terpusat</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Wadah diskusi interaktif untuk bertanya seputar kendala tanaman dan berbagi tips sukses antar petani.</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900/80 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 flex items-start gap-5 hover:border-amber-500/40 transition">
-                    <span class="text-3xl bg-amber-500/15 text-amber-400 p-3.5 rounded-2xl border border-amber-500/30 flex-shrink-0">📈</span>
-                    <div>
-                        <h4 class="font-bold text-xl text-white mb-2">Peningkatan Produktivitas</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Optimalisasi panen dan efisiensi biaya melalui pupuk organik mandiri ramah lingkungan.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Galeri Dokumentasi -->
-        <section id="galeri" class="text-center">
-            <div class="mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1.5 rounded-full inline-block mb-3">
-                    Aktivitas Lapangan
-                </span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white">
-                    Galeri <span class="text-emerald-400">Dokumentasi</span>
+            <!-- Manfaat -->
+            <section id="manfaat" class="text-center">
+                <h2 class="text-4xl font-bold text-white mb-12">
+                    Manfaat <span class="text-green-400">AgriLens</span>
                 </h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                @foreach ([1, 2, 3, 4] as $item)
-                    <div class="group relative overflow-hidden rounded-2xl shadow-xl bg-slate-900/80 border border-white/10">
-                        <img src="{{ asset('assets/dokumentasi/pertemuanPertama.jpg') }}" 
-                             alt="Dokumentasi AgriLens {{ $item }}"
-                             class="w-full h-56 object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/1e293b/4ade80?text=Dokumentasi+{{ $item }}';" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-5">
-                            <p class="text-white text-sm font-bold">Kegiatan Pendampingan Tani #{{ $item }}</p>
+                <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+                    <!-- Benefit 1 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500 flex items-start space-x-4">
+                        <div class="text-green-400 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.205 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.795 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.795 5 16.5 5c1.705 0 3.332.477 4.5 1.253v13C19.832 18.477 18.205 18 16.5 18c-1.705 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-xl text-white mb-2">Edukasi Modern</h4>
+                            <p class="text-gray-300">Menyediakan materi edukasi pertanian yang mudah diakses dan dipahami oleh semua kalangan, dari pemula hingga ahli.</p>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        </section>
+                    <!-- Benefit 2 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500 flex items-start space-x-4">
+                        <div class="text-green-400 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-xl text-white mb-2">Analisis Data Akurat</h4>
+                            <p class="text-gray-300">Mempermudah petani dalam melakukan analisis tanah, jadwal tanam, dan pencatatan hasil panen berbasis data yang akurat.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 3 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500 flex items-start space-x-4">
+                        <div class="text-green-400 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-xl text-white mb-2">Pusat Informasi Komunitas</h4>
+                            <p class="text-gray-300">Menjadi hub informasi pertanian terpusat di tingkat RT/RW, memfasilitasi pertukaran pengetahuan dan pengalaman.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 4 -->
+                    <div class="bg-black/30 backdrop-blur-xl p-8 rounded-2xl shadow-xl transform hover:-translate-y-2 transition duration-500 flex items-start space-x-4">
+                        <div class="text-green-400 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-xl text-white mb-2">Peningkatan Produktivitas</h4>
+                            <p class="text-gray-300">Meningkatkan hasil panen dan efisiensi pertanian melalui penerapan teknologi dan data yang tepat dan terarah.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+        </div>
     </div>
+
+    {{-- Galeri Dokumentasi (Directive @foreach) --}}
+    <section id="galeri" class="text-center mt-20">
+        <h2 class="text-4xl font-bold text-white mb-12">
+            Galeri <span class="text-green-400">Dokumentasi</span>
+        </h2>
+
+        <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-6">
+            @foreach ([1, 2, 3, 4] as $item)
+                <div class="group relative overflow-hidden rounded-2xl shadow-xl bg-black/30 backdrop-blur-xl">
+                    <img src="{{ asset('assets/dokumentasi/pertemuanPertama.jpg') }}" 
+                         alt="Galeri {{ $item }}"
+                         class="w-full h-56 object-cover transition duration-500 group-hover:scale-110" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x300/1e293b/4ade80?text=Dokumentasi+{{ $item }}';" />
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                        <p class="text-white text-lg font-semibold">Meeting-{{ $item }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
 @endsection
+

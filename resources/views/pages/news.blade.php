@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Berita Terkini Pertanian - AgriLens')
 
@@ -7,20 +7,17 @@
     <!-- Hero Section -->
     <section class="max-w-4xl mx-auto text-center mb-16">
         <div class="bg-black/40 backdrop-blur-xl p-10 md:p-14 rounded-3xl shadow-2xl border border-white/10">
-            <span class="text-xs bg-green-500/20 text-green-300 px-4 py-1.5 rounded-full border border-green-500/30 uppercase font-bold tracking-wider">
-                Warta Agrikultur
-            </span>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white mt-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white">
                 📰 Berita Terbaru <span class="text-green-400">AgriLens</span>
             </h1>
             <p class="mt-4 text-gray-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-                Informasi aktual mengenai tren harga komoditas pangan, prediksi iklim pertanian, dan teknologi agrikultur modern.
+                Update informasi terbaru seputar pertanian, komoditas, teknologi, dan dunia agrikultur.
             </p>
         </div>
     </section>
 
     <!-- Kategori Filter Legend -->
-    <div class="flex justify-center flex-wrap gap-2 mb-10">
+    <div class="flex justify-center flex-wrap gap-3 mb-12">
         <x-badge category="Harga Pasar">Harga Pasar</x-badge>
         <x-badge category="Cuaca & Iklim">Cuaca & Iklim</x-badge>
         <x-badge category="Teknologi">Teknologi</x-badge>
@@ -28,7 +25,7 @@
     </div>
 
     {{-- Grid Berita Menggunakan Directive @forelse dan Partial @include --}}
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-7xl mx-auto">
         @forelse ($newsList as $news)
             @include('partials.news-card', ['news' => $news])
         @empty
@@ -39,4 +36,3 @@
     </div>
 </main>
 @endsection
-

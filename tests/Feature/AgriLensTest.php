@@ -11,7 +11,7 @@ class AgriLensTest extends TestCase
         $response = $this->get(route('home'));
         $response->assertStatus(200);
         $response->assertSee('AgriLens');
-        $response->assertSee('Pertanian Lebih Cerdas dengan');
+        $response->assertSee('Masa Depan Pertanian Dimulai di Sini');
         $response->assertSee('Latar Belakang');
     }
 
