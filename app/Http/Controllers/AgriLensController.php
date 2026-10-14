@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
+use App\Models\Modul;
 use Illuminate\View\View;
 
 class AgriLensController extends Controller
@@ -182,24 +184,63 @@ class AgriLensController extends Controller
     /**
      * Halaman Beranda (Home)
      */
+    /**
+     * Halaman Beranda (Home)
+     */
     public function home(): View
     {
+        try {
+            $featuredModules = Modul::with('kategori')->take(3)->get();
+        } catch (\Throwable $e) {
+            $featuredModules = collect();
+        }
+
+        if ($featuredModules->isEmpty()) {
+            $featuredModules = collect(array_slice($this->modules, 0, 3));
+        }
+
+        try {
+            $featuredNews = Berita::latest('post_date')->take(3)->get();
+        } catch (\Throwable $e) {
+            $featuredNews = collect();
+        }
+
+        if ($featuredNews->isEmpty()) {
+            $featuredNews = collect(array_slice($this->newsList, 0, 3));
+        }
+
         return view('pages.home', [
-            'featuredModules' => array_slice($this->modules, 0, 3),
-            'featuredNews' => array_slice($this->newsList, 0, 3),
+            'featuredModules' => $featuredModules,
+            'featuredNews' => $featuredNews,
         ]);
     }
 
     /**
      * Halaman Modul Edukasi Pertanian
      */
+    /**
+     * Halaman Modul Edukasi Pertanian
+     */
     public function modules(): View
     {
-        $tanaman = array_filter($this->modules, fn ($m) => $m['category'] === 'Panduan Menanam');
-        $pupuk = array_filter($this->modules, fn ($m) => $m['category'] === 'Panduan Membuat Pupuk');
+        try {
+            $dbModules = Modul::with('kategori')->get();
+        } catch (\Throwable $e) {
+            $dbModules = collect();
+        }
+
+        if ($dbModules->isNotEmpty()) {
+            $modules = $dbModules;
+            $tanaman = $dbModules->filter(fn ($m) => $m->kategori?->slug === 'panduan-menanam' || $m->category === 'Panduan Menanam');
+            $pupuk = $dbModules->filter(fn ($m) => $m->kategori?->slug === 'panduan-membuat-pupuk' || $m->category === 'Panduan Membuat Pupuk');
+        } else {
+            $modules = $this->modules;
+            $tanaman = array_filter($this->modules, fn ($m) => $m['category'] === 'Panduan Menanam');
+            $pupuk = array_filter($this->modules, fn ($m) => $m['category'] === 'Panduan Membuat Pupuk');
+        }
 
         return view('pages.module', [
-            'modules' => $this->modules,
+            'modules' => $modules,
             'tanaman' => $tanaman,
             'pupuk' => $pupuk,
         ]);
@@ -208,10 +249,23 @@ class AgriLensController extends Controller
     /**
      * Halaman Rincian Modul
      */
+    /**
+     * Halaman Rincian Modul
+     */
     public function moduleDetail(int $id): View
     {
-        $module = collect($this->modules)->firstWhere('id', $id) ?? $this->modules[0];
-        $relatedModules = collect($this->modules)->where('id', '!==', $module['id'])->take(3);
+        try {
+            $module = Modul::with('kategori')->find($id);
+        } catch (\Throwable $e) {
+            $module = null;
+        }
+
+        if ($module) {
+            $relatedModules = Modul::with('kategori')->where('id', '!=', $module->id)->take(3)->get();
+        } else {
+            $module = collect($this->modules)->firstWhere('id', $id) ?? $this->modules[0];
+            $relatedModules = collect($this->modules)->where('id', '!==', is_array($module) ? $module['id'] : $module->id)->take(3);
+        }
 
         return view('pages.module-detail', [
             'module' => $module,
@@ -222,24 +276,51 @@ class AgriLensController extends Controller
     /**
      * Halaman Berita Pertanian
      */
+    /**
+     * Halaman Berita Pertanian
+     */
     public function news(): View
     {
+        try {
+            $newsList = Berita::latest('post_date')->get();
+        } catch (\Throwable $e) {
+            $newsList = collect();
+        }
+
+        if ($newsList->isEmpty()) {
+            $newsList = $this->newsList;
+        }
+
         return view('pages.news', [
-            'newsList' => $this->newsList,
+            'newsList' => $newsList,
         ]);
     }
 
     /**
      * Halaman Rincian Berita
      */
+    /**
+     * Halaman Rincian Berita
+     */
     public function newsDetail(int $id): View
     {
-        $news = collect($this->newsList)->firstWhere('id', $id) ?? $this->newsList[0];
-        $recentNews = collect($this->newsList)->where('id', '!==', $news['id'])->take(3);
+        try {
+            $news = Berita::find($id);
+        } catch (\Throwable $e) {
+            $news = null;
+        }
+
+        if ($news) {
+            $latestNews = Berita::where('id', '!=', $news->id)->latest('post_date')->take(3)->get();
+        } else {
+            $news = collect($this->newsList)->firstWhere('id', $id) ?? $this->newsList[0];
+            $latestNews = collect($this->newsList)->where('id', '!==', is_array($news) ? $news['id'] : $news->id)->take(3);
+        }
 
         return view('pages.news-detail', [
             'news' => $news,
-            'recentNews' => $recentNews,
+            'recentNews' => $latestNews,
+            'latestNews' => $latestNews,
         ]);
     }
 
@@ -300,5 +381,34 @@ class AgriLensController extends Controller
     public function login(): View
     {
         return view('pages.auth');
+    }
+
+    /**
+     * Halaman Dashboard Utama Petani & Manajemen
+     * Dapat diakses langsung tanpa autentikasi / sesi login.
+     */
+    public function dashboard(): View
+    {
+        try {
+            $totalModul = Modul::count();
+            $totalKategori = Kategori::count();
+            $totalBerita = Berita::count();
+            $recentModules = Modul::with('kategori')->latest('id')->take(6)->get();
+            $recentNews = Berita::latest('post_date')->take(3)->get();
+        } catch (\Throwable $e) {
+            $totalModul = count($this->modules);
+            $totalKategori = 4;
+            $totalBerita = count($this->newsList);
+            $recentModules = collect(array_slice($this->modules, 0, 6));
+            $recentNews = collect(array_slice($this->newsList, 0, 3));
+        }
+
+        return view('pages.dashboard', [
+            'totalModul' => $totalModul,
+            'totalKategori' => $totalKategori,
+            'totalBerita' => $totalBerita,
+            'recentModules' => $recentModules,
+            'recentNews' => $recentNews,
+        ]);
     }
 }

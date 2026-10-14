@@ -76,7 +76,7 @@
 
             <!-- Tombol Dashboard (Desktop) -->
             <div class="hidden md:block">
-                <a href="{{ route('auth.login') }}" 
+                <a href="{{ route('admin.dashboard') }}" 
                    class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-black py-2.5 px-7 rounded-2xl transition-all shadow-xl shadow-emerald-500/20 active:scale-95 flex items-center gap-2 text-sm">
                     <span>📊</span> Dashboard
                 </a>
@@ -95,7 +95,7 @@
                 <a href="{{ route('news.index') }}" class="text-gray-300 hover:text-green-400 transition duration-300">News - AgriLens</a>
                 <a href="{{ route('quiz.index') }}" class="text-gray-300 hover:text-green-400 transition duration-300">Quiz & Tantangan</a>
                 <a href="{{ route('forum.index') }}" class="text-gray-300 hover:text-green-400 transition duration-300">Forum</a>
-                <a href="{{ route('auth.login') }}" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-black py-3 px-6 text-center rounded-2xl transition-all flex items-center justify-center gap-2">
+                <a href="{{ route('admin.dashboard') }}" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-black py-3 px-6 text-center rounded-2xl transition-all flex items-center justify-center gap-2">
                     <span>📊</span> Dashboard
                 </a>
             </div>

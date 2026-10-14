@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminModulController;
 use App\Http\Controllers\AgriLensController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,22 @@ Route::get('/lens-ai', [AgriLensController::class, 'lensAi'])->name('lens.ai');
 
 // 7. Login / Autentikasi
 Route::get('/auth', [AgriLensController::class, 'login'])->name('auth.login');
+
+// 8. Dashboard Utama (Akses Langsung Tanpa Sesi Login)
+
+/*
+|--------------------------------------------------------------------------
+| Admin CRUD Management Routes (Tanpa Sesi Login)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminModulController::class, 'index'])->name('dashboard');
+    Route::get('/modules/create', [AdminModulController::class, 'create'])->name('modules.create');
+    Route::post('/modules', [AdminModulController::class, 'store'])->name('modules.store');
+    Route::get('/modules/{id}/edit', [AdminModulController::class, 'edit'])->name('modules.edit');
+    Route::put('/modules/{id}', [AdminModulController::class, 'update'])->name('modules.update');
+    Route::delete('/modules/{id}', [AdminModulController::class, 'destroy'])->name('modules.destroy');
+});
+
+// Alias direct route /dashboard
+Route::get('/dashboard', [AdminModulController::class, 'index'])->name('dashboard.index');
